@@ -25,7 +25,7 @@ import sys
 import controller
 from DISClib.ADT import list as lt
 assert cf
-
+import time as t
 
 """
 La vista se encarga de la interacción con el usuario
@@ -87,10 +87,14 @@ Menu principal
 while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
+
     if int(inputs[0]) == 1:
         print("Cargando información de los archivos ....")
+        ts = t.process_time_ns()
         catalog = initCatalog()
         loadData(catalog)
+        t2 = t.process_time_ns()
+        print("Elapsed time: {:.10f} nano seconds".format(t2-ts))
         print('Libros cargados: ' + str(lt.size(catalog['books'])))
         print('Autores cargados: ' + str(lt.size(catalog['authors'])))
         print('Géneros cargados: ' + str(lt.size(catalog['tags'])))
